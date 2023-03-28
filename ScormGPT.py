@@ -43,7 +43,7 @@ df_activityTimespent = pd.to_timedelta(df_activity.iloc[:, 9])
 # Calculate performance metrics
 total_learners = len(df_enrollment_metrics)
 total_attempts = df_activity.iloc[:, 8].sum()
-# average_time_spent = df_activity['Total_Time_Spent'].mean()
+average_time_spent = df_activityTimespent.mean()
 
 # Create a bar chart of total attempts for each module
 # fig, ax = plt.subplots()
@@ -53,7 +53,7 @@ total_attempts = df_activity.iloc[:, 8].sum()
 # plt.title('Total Attempts by Module')
 
 # Convert the plot to an interactive chart using mpld3
-html_graph = mpld3.fig_to_html(fig, template_type="simple")
+# html_graph = mpld3.fig_to_html(fig, template_type="simple")
 
 activityhrs = df_activity['Total_Time_Spent'].dt.total_seconds() / 3600
 ahrs = activityhrs.mean()
@@ -63,7 +63,7 @@ st.subheader('Performance Metrics')
 col1, col2, col3 = st.columns(3)
 col1.metric(label='Total Number of Learners:', value=total_learners, delta="1.3%")
 col2.metric(label='Total Number of Attempts:', value=total_attempts, delta="-1.5%")
-col3.metric(label='Average Time Spent', value=ahrs, delta="7%")
+col3.metric(label='Average Time Spent', value=average_time_spent, delta="7%")
 st.subheader('Total Attempts by Module')
 components.html(html_graph, height=600)
 
