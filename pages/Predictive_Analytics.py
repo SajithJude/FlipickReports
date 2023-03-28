@@ -22,13 +22,14 @@ df_enrollment_metrics  = pd.DataFrame(df_enrollment_metrics)
 df_activity  = pd.DataFrame(df_activity)
 df_levelReport = pd.DataFrame(df_levelReport)
 
+st.table(df_enrollment_metrics)
+
 
 df_levelReport.columns = [c.replace(' ', '_') for c in df_levelReport.columns]
 df_levelwise_assessment.columns = [c.replace(' ', '_') for c in df_levelwise_assessment.columns]
 df_enrollment_metrics.columns = [c.replace(' ', '_') for c in df_enrollment_metrics.columns]
 df_activity.columns = [c.replace(' ', '_') for c in df_activity.columns]
 
-st.table(df_enrollment_metrics)
 
 # df_enrollment_metrics = df_enrollment_metrics.rename(columns={'Learner_Email': 'Email_Id'})
 
