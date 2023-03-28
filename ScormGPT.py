@@ -7,7 +7,7 @@ import streamlit.components.v1 as components
 
 # Read data from CSV files
 df_activity = pd.read_csv('AllLevelActivity_L1 - Sheet 1.csv')
-df_levelwise_assessment = pd.read_csv('Level Wise assessment for level1.csv')
+df_levelwise_assessment = pd.read_csv('LevelWiseAssement_Level1 - Sheet 1.csv')
 df_enrollment_metrics = pd.read_csv('EnrollmentMetrics - Sheet 1.csv')
 
 # Calculate performance metrics
