@@ -85,7 +85,7 @@ col3.metric(label='Average Time Spent', value=average_time_spent, delta="7%")
 st.subheader('Total Attempts by Module')
 components.html(html_graph, height=600)
 
-except KeyError:
+except IndexError:
     st.warning("Upload Files to View Analytics")
 
 
