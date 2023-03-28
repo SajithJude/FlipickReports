@@ -149,4 +149,5 @@ with st.expander("Keep pushing the persistent Users"):
 for filename in ['AllLevelActivity_L1.xlsx', 'LevelWiseAssesment_Level1.xlsx', 'EnrollmentMetrics.xlsx', 'LevelWiseReport_Level1.xlsx']:
     if os.path.isfile(filename):
         os.remove(filename)
+        st.write(filename," Removed successfully")
 
