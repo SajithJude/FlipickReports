@@ -15,7 +15,7 @@ df_levelwise_assessment  = st.session_state['df_levelwise_assessment']
 df_enrollment_metrics  = st.session_state['df_enrollment_metrics'] 
 df_activity  = st.session_state['df_activity'] 
 df_levelReport = st.session_state['df_levelReport']
-st.table(df_enrollment_metrics)
+st.write(df_enrollment_metrics)
 
 
 df_levelwise_assessment  = pd.DataFrame(df_levelwise_assessment)
