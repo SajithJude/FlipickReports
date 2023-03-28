@@ -25,6 +25,7 @@ if df_activity_file is not None:
     df_activity = read_excel_file(df_activity_file)
 else:
     df_activity = pd.DataFrame()
+    st.table(df_activity.head())
     
 if df_levelwise_assessment_file is not None:
     df_levelwise_assessment = read_excel_file(df_levelwise_assessment_file)
