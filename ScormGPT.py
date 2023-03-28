@@ -57,15 +57,15 @@ total_learners = len(df_enrollment_metrics)
 total_attempts = df_activity.iloc[:, 8].sum()
 st.table(df_activity.head())
 
-# Create a bar chart of total attempts for each module
-# fig, ax = plt.subplots()
-# df_activity[['Modules Completed', 'Total_No_Of_Attempts']].groupby(['Modules Completed']).sum().plot(kind='bar', ax=ax)
-# ax.set_xlabel('Modules Completed')
-# ax.set_ylabel('Total_No_Of_Attempts')
-# plt.title('Total Attempts by Module')
+Create a bar chart of total attempts for each module
+fig, ax = plt.subplots()
+df_activity.iloc[:, [6, 9]].groupby(df_activity.iloc[:, 6]).sum().plot(kind='bar', ax=ax)
+ax.set_xlabel('Modules Completed')
+ax.set_ylabel('Total_No_Of_Attempts')
+plt.title('Total Attempts by Module')
 
-# Convert the plot to an interactive chart using mpld3
-# html_graph = mpld3.fig_to_html(fig, template_type="simple")
+Convert the plot to an interactive chart using mpld3
+html_graph = mpld3.fig_to_html(fig, template_type="simple")
 
 # Create the streamlit app
 st.title('Overall Performance Dashboard')
