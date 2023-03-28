@@ -63,7 +63,3 @@ if not df_activity.empty and not df_enrollment_metrics.empty:
     components.html(html_graph, height=600)
 
 # Delete Excel files at the end
-for filename in ['AllLevelActivity_L1.xlsx', 'LevelWiseAssesment_Level1.xlsx', 'EnrollmentMetrics.xlsx', 'LevelWiseReport_Level1.xlsx']:
-    if os.path.isfile(filename):
-        os.remove(filename)
-

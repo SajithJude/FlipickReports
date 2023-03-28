@@ -100,3 +100,11 @@ with st.expander("Keep pushing the persistent Users"):
     proact = st.button("Generate Email")
     if proact:
         st.success("Generating Motivational Email follow up questions")
+
+
+
+
+for filename in ['AllLevelActivity_L1.xlsx', 'LevelWiseAssesment_Level1.xlsx', 'EnrollmentMetrics.xlsx', 'LevelWiseReport_Level1.xlsx']:
+    if os.path.isfile(filename):
+        os.remove(filename)
+
