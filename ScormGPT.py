@@ -6,6 +6,8 @@ from mpld3 import plugins
 import streamlit.components.v1 as components
 import os
 
+openai.api_key = os.getenv("API_KEY")
+
 # Read data from Excel files
 def read_excel_file(file):
     df = pd.read_excel(file, engine='openpyxl')
@@ -15,8 +17,16 @@ def read_excel_file(file):
 df_activity_file = st.file_uploader('Upload ALL level activity XLSX file', type=['xlsx'])
 df_levelwise_assessment_file = st.file_uploader('Upload Level Wise assessment for level1 XLSX file', type=['xlsx'])
 df_enrollment_metrics_file = st.file_uploader('Upload EnrollmentMetrics XLSX file', type=['xlsx'])
+df_levelReport_file = st.file_uploader('Upload LevelWiseReport_Level1', type=['xlsx'])
 
 # If files already exist in the directory, load them
+if os.path.isfile('AllLevelActivity_L1.xlsx'):
+    df_levelReport = pd.read_excel('AllLevelActivity_L1.xlsx', engine='openpyxl')
+    st.session_state['df_levelReport'] = df_levelReport
+else:
+    df_levelReport = pd.DataFrame()
+
+
 if os.path.isfile('AllLevelActivity_L1.xlsx'):
     df_activity = pd.read_excel('AllLevelActivity_L1.xlsx', engine='openpyxl')
     st.session_state['df_activity'] = df_activity
@@ -50,6 +60,13 @@ if df_enrollment_metrics_file is not None:
     df_enrollment_metrics = read_excel_file(df_enrollment_metrics_file)
     df_enrollment_metrics.to_excel('df_enrollment_metrics.xlsx', index=False)
     st.session_state['df_enrollment_metrics'] = df_enrollment_metrics
+
+if df_levelReport_file is not None:
+    df_levelReport = read_excel_file(df_levelReport_file)
+    df_levelReport.to_excel('AllLevelActivity_L1.xlsx', index=False)
+    st.session_state['df_levelReport'] = df_levelReport
+
+
 
 try:
     df_activity['hours'] = pd.to_datetime(df_activity.iloc[:, 9]) - pd.to_datetime(df_activity.iloc[:, 9]).min()

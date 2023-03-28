@@ -3,11 +3,14 @@ import streamlit as st
 
 import pandas as pd
 
+openai.api_key = os.getenv("API_KEY")
+
 df_levelwise_assessment  = st.session_state['df_levelwise_assessment'] 
 df_enrollment_metrics  = st.session_state['df_enrollment_metrics'] 
 df_activity  = st.session_state['df_activity'] 
+df_levelReport = st.session_state['df_levelReport']
 
-
+df_levelReport.columns = [c.replace(' ', '_') for c in df_levelReport.columns]
 df_levelwise_assessment.columns = [c.replace(' ', '_') for c in df_levelwise_assessment.columns]
 df_enrollment_metrics.columns = [c.replace(' ', '_') for c in df_enrollment_metrics.columns]
 df_enrollment_metrics = df_enrollment_metrics.rename(columns={'Learner_Email': 'Email_Id'})
@@ -28,8 +31,11 @@ total = len(df_enrollment_metrics)
 # Select the columns with user names and emails
 df_filtered = df_filtered[['Learner_Name', 'Email_Id']]
 
+df_filtered_names = df_filtered['Learner_Name']
+df_levelReport_filtered = df_levelReport[df_levelReport['Learner_Name'].isin(df_filtered_names)]
+
 # Show the filtered dataframe
-st.table(df_filtered)
+st.table(df_levelReport_filtered)
 
 st.title("Predictive analytics")
 st.subheader("learners who are at risk of dropping out of the course")
@@ -42,8 +48,37 @@ st.write("From the available data usage reports, we have predicted that " + str(
 
 with st.expander("Take Proactive measures to retain Users"):
     proact = st.button("start")
+    moodules = st.multiselect("Select Weak modules",['Green', 'Yellow', 'Red', 'Blue'],)
     if proact:
         st.success("Generating Motivational Email and studyplan")
+        input = "Generate a Motivational followup email for students who feel lack of motivation due to low score on modules like 
+        response = openai.Completion.create(
+            model="text-davinci-003",
+            prompt=input,
+            temperature=0.56,
+            max_tokens=2100,
+            top_p=1,
+            frequency_penalty=0.35,
+            presence_penalty=0
+        )
+        st.code(response.choices[0].text, language=None)
+
+with st.expander("Take Proactive measures to retain Users"):
+    proact = st.button("start")
+    if proact:
+        st.success("Generating Motivational Email and studyplan")
+        input = "Generate a Motivational followup email for students who feel lack of motivation due to low score on modules like 
+        response = openai.Completion.create(
+            model="text-davinci-003",
+            prompt=input,
+            temperature=0.56,
+            max_tokens=2100,
+            top_p=1,
+            frequency_penalty=0.35,
+            presence_penalty=0
+        )
+        st.code(response.choices[0].text, language=None)
+
 
 with st.expander("Keep pushing the persistent Users"):
     proact = st.button("Generate Email")
