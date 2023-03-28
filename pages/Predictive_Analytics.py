@@ -28,6 +28,7 @@ df_levelwise_assessment.columns = [c.replace(' ', '_') for c in df_levelwise_ass
 df_enrollment_metrics.columns = [c.replace(' ', '_') for c in df_enrollment_metrics.columns]
 df_activity.columns = [c.replace(' ', '_') for c in df_activity.columns]
 
+st.table(df_enrollment_metrics)
 
 # df_enrollment_metrics = df_enrollment_metrics.rename(columns={'Learner_Email': 'Email_Id'})
 
