@@ -75,7 +75,7 @@ col1.metric(label='Total Number of Learners:', value=total_learners, delta="1.3%
 col2.metric(label='Total Number of Attempts:', value=total_attempts, delta="-1.5%")
 col3.metric(label='Average Time Spent', value=average_time_spent, delta="7%")
 st.subheader('Total Attempts by Module')
-# components.html(html_graph, height=600)
+components.html(html_graph, height=600)
 
 
 
