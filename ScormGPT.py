@@ -66,10 +66,10 @@ if not df_activity.empty and not df_enrollment_metrics.empty:
 
 
 
-df_levelReport.columns = [c.replace(' ', '_') for c in df_levelReport.columns]
-df_levelwise_assessment.columns = [c.replace(' ', '_') for c in df_levelwise_assessment.columns]
-df_enrollment_metrics.columns = [c.replace(' ', '_') for c in df_enrollment_metrics.columns]
-df_activity.columns = [c.replace(' ', '_') for c in df_activity.columns]
+# df_levelReport.columns = [c.replace(' ', '_') for c in df_levelReport.columns]
+# df_levelwise_assessment.columns = [c.replace(' ', '_') for c in df_levelwise_assessment.columns]
+# df_enrollment_metrics.columns = [c.replace(' ', '_') for c in df_enrollment_metrics.columns]
+# df_activity.columns = [c.replace(' ', '_') for c in df_activity.columns]
 
 
 df_enrollment_metrics = df_enrollment_metrics.rename(columns={'Learner_Email': 'Email_Id'})
