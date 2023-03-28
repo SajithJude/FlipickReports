@@ -40,7 +40,8 @@ else:
 try:
 
 
-    df_activityTimespent = pd.to_timedelta(df_activity.iloc[:, 10])
+    df_activityTimespent = df_activity.iloc[:, 9]
+    st.write(df_activityTimespent)
     average_time_spent = df_activityTimespent.mean()
         
     # activityhrs = df_activity['Total_Time_Spent'].dt.total_seconds() / 3600
