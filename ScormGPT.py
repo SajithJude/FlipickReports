@@ -10,6 +10,8 @@ df_activity = pd.read_csv('AllLevelActivity_L1 - Sheet 1.csv')
 df_levelwise_assessment = pd.read_csv('LevelWiseAssement_Level1 - Sheet 1.csv')
 df_enrollment_metrics = pd.read_csv('EnrollmentMetrics - Sheet 1.csv')
 
+df_activity['Total Time Spent'] = pd.to_timedelta(df_activity['Total Time Spent'])
+
 # Calculate performance metrics
 total_learners = len(df_enrollment_metrics)
 total_attempts = df_activity['Total_No_Of_Attempts'].sum()
