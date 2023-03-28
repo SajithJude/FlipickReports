@@ -71,7 +71,7 @@ if not df_activity.empty and not df_enrollment_metrics.empty:
 # df_enrollment_metrics.columns = [c.replace(' ', '_') for c in df_enrollment_metrics.columns]
 # # df_activity.columns = [c.replace(' ', '_') for c in df_activity.columns]
 
-
+st.table(df_enrollment_metrics.head())
 # df_enrollment_metrics = df_enrollment_metrics.rename(columns={'Learner_Email': 'Email_Id'})
 
 df_enrollment_metrics['target'] = df_enrollment_metrics.apply(lambda row: 1 if row['Diagnostic_Or_First_Level_Assigned'] == row['Current_Level'] else 0, axis=1)
