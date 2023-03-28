@@ -40,8 +40,8 @@ else:
 try:
 
 
-    df_activity['hours'] = pd.to_datetime(df_activity.iloc[:, 9]) - pd.to_datetime(df['date']).min()
-    df['hours'] = df['hours'].dt.total_seconds() / 3600
+    df_activity['hours'] = pd.to_datetime(df_activity.iloc[:, 9]) - pd.to_datetime(df_activity.iloc[:, 9]).min()
+    df_activity['hours'] = df_activity['hours'].dt.total_seconds() / 3600
     # df_activity['hours']  =  df_activity['hours'].dt.total_seconds() / 3600
     average_time_spent =  df_activity['hours']
     st.write(average_time_spent)
