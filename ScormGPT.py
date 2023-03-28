@@ -23,34 +23,37 @@ df_enrollment_metrics_file = st.file_uploader('Upload EnrollmentMetrics XLSX fil
 # Read data from uploaded Excel files
 if df_activity_file is not None:
     df_activity = read_excel_file(df_activity_file)
+    if 'df_activity' not in st.session_state:
+        st.session_state['df_activity'] = df_activity
+
 else:
-    df_activity = pd.DataFrame()
-    
+    df_activity = pd.DataFrame() 
     
 if df_levelwise_assessment_file is not None:
     df_levelwise_assessment = read_excel_file(df_levelwise_assessment_file)
+    if 'df_levelwise_assessment' not in st.session_state:
+        st.session_state['df_levelwise_assessment'] = df_levelwise_assessment
 else:
     df_levelwise_assessment = pd.DataFrame()
 
 if df_enrollment_metrics_file is not None:
     df_enrollment_metrics = read_excel_file(df_enrollment_metrics_file)
+    if 'df_enrollment_metrics' not in st.session_state:
+        st.session_state['df_enrollment_metrics'] = df_enrollment_metrics
 else:
     df_enrollment_metrics = pd.DataFrame()
 
 try:
-
-
     df_activity['hours'] = pd.to_datetime(df_activity.iloc[:, 9]) - pd.to_datetime(df_activity.iloc[:, 9]).min()
     df_activity['hours'] = df_activity['hours'].dt.total_seconds() / 3600
     # df_activity['hours']  =  df_activity['hours'].dt.total_seconds() / 3600
     average_time_spent =  df_activity['hours'].mean()
     st.write(average_time_spent)
-
-        
-    # activityhrs = df_activity['Total_Time_Spent'].dt.total_seconds() / 3600
-    # ahrs = activityhrs.mean()
 except KeyError:
     st.warning("Upload Files to View Analytics")
+
+
+
 
 # Calculate performance metrics
 total_learners = len(df_enrollment_metrics)
@@ -69,6 +72,7 @@ html_graph = mpld3.fig_to_html(fig, template_type="simple")
 
 # Create the streamlit app
 st.title('Overall Performance Dashboard')
+st.caption("This provides an overview of the performance metrics like total number of learners, average time spent, and total number of attempts for each module can be created to provide an overview of the institute's LMS usage")
 st.subheader('Performance Metrics')
 col1, col2, col3 = st.columns(3)
 col1.metric(label='Total Number of Learners:', value=total_learners, delta="1.3%")
