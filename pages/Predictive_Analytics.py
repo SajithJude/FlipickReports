@@ -67,7 +67,7 @@ with st.expander("Take Proactive measures to retain Users"):
         st.code(response.choices[0].text, language=None)
 
 with st.expander("Congrajulate Active users"):
-    proact = st.button("start")
+    proact = st.button("generate wish")
     if proact:
         st.success("Generating Motivational Email and studyplan")
         it = "Generate a Motivational followup email for students who feel lack of motivation due to low score on modules like "
