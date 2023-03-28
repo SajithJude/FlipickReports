@@ -7,24 +7,10 @@ import streamlit.components.v1 as components
 import os
 import zipfile
 
-# Define function to read Excel files
-def read_excel_file(file):
-    df = pd.read_excel(file, engine='openpyxl')
-    return df
-
 # Define function to extract zip files
 def extract_zip_file(file):
     with zipfile.ZipFile(file, 'r') as zip_ref:
         zip_ref.extractall()
-
-# Define file uploaders
-file_uploaders = {
-    'Upload ALL level activity XLSX file': 'df_activity.xlsx',
-    'Upload Level Wise assessment for level1 XLSX file': 'df_levelwise_assessment.xlsx',
-    'Upload EnrollmentMetrics XLSX file': 'df_enrollment_metrics.xlsx',
-    'Upload LevelWiseReport_Level1': 'df_levelReport.xlsx',
-    'Upload zip file': 'data.zip'
-}
 
 # Create session state if it does not exist
 if 'df_activity' not in st.session_state:
@@ -36,22 +22,16 @@ if 'df_enrollment_metrics' not in st.session_state:
 if 'df_levelReport' not in st.session_state:
     st.session_state['df_levelReport'] = pd.DataFrame()
 
-# Allow the user to upload files and extract zip file
-for title, filename in file_uploaders.items():
-    file = st.file_uploader(title, type=['xlsx', 'zip'])
-    if file is not None:
-        if file.name.endswith('.zip'):
-            extract_zip_file(file)
-        else:
-            df = read_excel_file(file)
-            df.to_excel(filename, index=False)
-            st.session_state[filename.replace('.xlsx', '')] = df
+# Allow the user to upload a zip file
+file = st.file_uploader('Upload zip file', type=['zip'])
+if file is not None:
+    extract_zip_file(file)
 
 # Read data from Excel files
-df_activity = st.session_state['df_activity']
-df_levelwise_assessment = st.session_state['df_levelwise_assessment']
-df_enrollment_metrics = st.session_state['df_enrollment_metrics']
-df_levelReport = st.session_state['df_levelReport']
+df_activity = pd.read_excel('AllLevelActivity_L1.xlsx', engine='openpyxl') if os.path.isfile('AllLevelActivity_L1.xlsx') else pd.DataFrame()
+df_levelwise_assessment = pd.read_excel('LevelWiseAssesment_Level1.xlsx', engine='openpyxl') if os.path.isfile('LevelWiseAssesment_Level1.xlsx') else pd.DataFrame()
+df_enrollment_metrics = pd.read_excel('EnrollmentMetrics.xlsx', engine='openpyxl') if os.path.isfile('EnrollmentMetrics.xlsx') else pd.DataFrame()
+df_levelReport = pd.read_excel('LevelWiseReport_Level1.xlsx', engine='openpyxl') if os.path.isfile('LevelWiseReport_Level1.xlsx') else pd.DataFrame()
 
 # Calculate performance metrics and create charts
 if not df_activity.empty and not df_enrollment_metrics.empty:
@@ -81,6 +61,7 @@ if not df_activity.empty and not df_enrollment_metrics.empty:
     components.html(html_graph, height=600)
 
 # Delete Excel files at the end
-for filename in ['df_activity.xlsx', 'df_levelwise_assessment.xlsx', 'df_enrollment_metrics.xlsx', 'df_levelReport.xlsx']:
+for filename in ['AllLevelActivity_L1.xlsx', 'LevelWiseAssesment_Level1.xlsx', 'EnrollmentMetrics.xlsx', 'LevelWiseReport_Level1.xlsx']:
     if os.path.isfile(filename):
         os.remove(filename)
+
