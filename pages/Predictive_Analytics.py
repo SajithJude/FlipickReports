@@ -13,15 +13,12 @@ df_enrollment_metrics.columns = [c.replace(' ', '_') for c in df_enrollment_metr
 df_enrollment_metrics = df_enrollment_metrics.rename(columns={'Learner_Email': 'Email_Id'})
 # df_activity.columns = [c.replace(' ', '_') for c in df_activity.columns]
 
+df_enrollment_metrics['target'] = df_enrollment_metrics.apply(lambda row: 1 if row['Diagnostic_Or_First_Level_Assigned'] == row['Current_Level'] else 0, axis=1)
 
 st.table(df_activity.head())
 st.table(df_enrollment_metrics.head())
 
-# st.table(df_levelwise_assessment.head())
-# st.table(df_enrollment_metrics.head())
 
-# st.write(df_activity.iloc[:, 1])
-# Merge the dataframes
 df = pd.merge(df_activity, df_levelwise_assessment, on=['Learner_Name', 'Email_Id'])
 
 st.table(df.head())
