@@ -10,8 +10,7 @@ df_activity  = st.session_state['df_activity']
 
 df_levelwise_assessment.columns = [c.replace(' ', '_') for c in df_levelwise_assessment.columns]
 df_enrollment_metrics.columns = [c.replace(' ', '_') for c in df_enrollment_metrics.columns]
-df_enrollment_metrics.columns[2] = [c.replace('Learner_Email', 'Email_Id') for c in df_enrollment_metrics.columns]
-
+df_enrollment_metrics.columns[2].replace('Learner_Email', 'Email_Id')
 df_activity.columns = [c.replace(' ', '_') for c in df_activity.columns]
 
 
