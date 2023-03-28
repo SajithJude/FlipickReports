@@ -71,7 +71,7 @@ if not df_activity.empty and not df_enrollment_metrics.empty:
 df_enrollment_metrics.columns = [c.replace(' ', '_') for c in df_enrollment_metrics.columns]
 # # df_activity.columns = [c.replace(' ', '_') for c in df_activity.columns]
 
-st.table(df_levelReport.head())
+st.table(df_enrollment_metrics.head())
 # df_enrollment_metrics = df_enrollment_metrics.rename(columns={'Learner_Email': 'Email_Id'})
 
 df_enrollment_metrics['target'] = df_enrollment_metrics.apply(lambda row: 1 if row['Diagnostic_Or_First_Level_Assigned'] == row['Current_Level'] else 0, axis=1)
@@ -93,7 +93,7 @@ df_filtered = df_filtered[['Learner_Name', 'Learner_Email']]
 # df_levelReport_filtered = df_levelReport[df_levelReport['Learner_Name'].isin(df_filtered_names)]
 
 # Show the filtered dataframe
-st.table(df_filtered)
+# st.table(df_levelReport_filtered)
 
 st.caption("Predictive analytics")
 st.subheader("learners who are at risk of dropping out of the course")
