@@ -55,14 +55,14 @@ try:
     df_activity['hours'] = pd.to_datetime(df_activity.iloc[:, 9]) - pd.to_datetime(df_activity.iloc[:, 9]).min()
     df_activity['hours'] = df_activity['hours'].dt.total_seconds() / 3600
     average_time_spent =  df_activity['hours'].mean()
-    st.write(average_time_spent)
+    # st.write(average_time_spent)
 
 
 
     # Calculate performance metrics
     total_learners = len(df_enrollment_metrics)
     total_attempts = df_activity.iloc[:, 8].sum()
-    st.table(df_activity.head())
+    # st.table(df_activity.head())
 
     # Create a bar chart of total attempts for each module
     fig, ax = plt.subplots()
