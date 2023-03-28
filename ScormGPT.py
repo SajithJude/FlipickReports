@@ -37,14 +37,17 @@ if df_enrollment_metrics_file is not None:
 else:
     df_enrollment_metrics = pd.DataFrame()
 
-# try:
+try:
 
 
-df_activityTimespent = pd.to_timedelta(df_activity.iloc[:, 10])
+    df_activityTimespent = pd.to_timedelta(df_activity.iloc[:, 10])
+    average_time_spent = df_activityTimespent.mean()
+except KeyError:
+    st.warning("Upload Files to View Analytics")
 # Calculate performance metrics
 total_learners = len(df_enrollment_metrics)
 total_attempts = df_activity.iloc[:, 8].sum()
-average_time_spent = df_activityTimespent.mean()
+
 
 # Create a bar chart of total attempts for each module
 # fig, ax = plt.subplots()
