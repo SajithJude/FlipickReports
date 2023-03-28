@@ -6,9 +6,35 @@ from mpld3 import plugins
 import streamlit.components.v1 as components
 
 # Read data from CSV files
-df_activity = pd.read_csv('AllLevelActivity_L1 - Sheet 1.csv')
-df_levelwise_assessment = pd.read_csv('LevelWiseAssement_Level1 - Sheet 1.csv')
-df_enrollment_metrics = pd.read_csv('EnrollmentMetrics - Sheet 1.csv')
+# df_activity = pd.read_csv('AllLevelActivity_L1 - Sheet 1.csv')
+# df_levelwise_assessment = pd.read_csv('LevelWiseAssement_Level1 - Sheet 1.csv')
+# df_enrollment_metrics = pd.read_csv('EnrollmentMetrics - Sheet 1.csv')
+
+
+def read_excel_file(file):
+    df = pd.read_excel(file, engine='openpyxl')
+    return df
+
+# Allow the user to upload Excel files
+df_activity_file = st.file_uploader('Upload ALL level activity XLSX file', type=['xlsx'])
+df_levelwise_assessment_file = st.file_uploader('Upload Level Wise assessment for level1 XLSX file', type=['xlsx'])
+df_enrollment_metrics_file = st.file_uploader('Upload EnrollmentMetrics XLSX file', type=['xlsx'])
+
+# Read data from uploaded Excel files
+if df_activity_file is not None:
+    df_activity = read_excel_file(df_activity_file)
+else:
+    df_activity = pd.DataFrame()
+    
+if df_levelwise_assessment_file is not None:
+    df_levelwise_assessment = read_excel_file(df_levelwise_assessment_file)
+else:
+    df_levelwise_assessment = pd.DataFrame()
+
+if df_enrollment_metrics_file is not None:
+    df_enrollment_metrics = read_excel_file(df_enrollment_metrics_file)
+else:
+    df_enrollment_metrics = pd.DataFrame()
 
 df_activity['Total_Time_Spent'] = pd.to_timedelta(df_activity['Total_Time_Spent'])
 # Calculate performance metrics
