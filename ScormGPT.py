@@ -25,7 +25,7 @@ if df_activity_file is not None:
     df_activity = read_excel_file(df_activity_file)
 else:
     df_activity = pd.DataFrame()
-    st.table(df_activity.head())
+    
     
 if df_levelwise_assessment_file is not None:
     df_levelwise_assessment = read_excel_file(df_levelwise_assessment_file)
@@ -51,7 +51,7 @@ except KeyError:
 # Calculate performance metrics
 total_learners = len(df_enrollment_metrics)
 total_attempts = df_activity.iloc[:, 8].sum()
-
+st.table(df_activity.head())
 
 # Create a bar chart of total attempts for each module
 # fig, ax = plt.subplots()
