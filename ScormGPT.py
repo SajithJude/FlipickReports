@@ -26,7 +26,7 @@ plt.title('Total Attempts by Module')
 # Convert the plot to an interactive chart using mpld3
 html_graph = mpld3.fig_to_html(fig, template_type="simple")
 
-activityhrs = df['Total_Time_Spent'].dt.total_seconds() / 3600
+activityhrs = df_activity['Total_Time_Spent'].dt.total_seconds() / 3600
 ahrs = activityhrs.mean()
 # Create the streamlit app
 st.title('Overall Performance Dashboard')
