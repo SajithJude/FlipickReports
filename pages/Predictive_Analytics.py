@@ -17,10 +17,10 @@ df_activity  = st.session_state['df_activity']
 df_levelReport = st.session_state['df_levelReport']
 
 
-pd.DataFrame(df_levelwise_assessment)
-pd.DataFrame(df_enrollment_metrics)
-pd.DataFrame(df_activity)
-pd.DataFrame(df_levelReport)
+df_levelwise_assessment  = pd.DataFrame(df_levelwise_assessment)
+df_enrollment_metrics  = pd.DataFrame(df_enrollment_metrics)
+df_activity  = pd.DataFrame(df_activity)
+df_levelReport = pd.DataFrame(df_levelReport)
 
 
 df_levelReport.columns = [c.replace(' ', '_') for c in df_levelReport.columns]
