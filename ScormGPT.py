@@ -20,11 +20,6 @@ df_enrollment_metrics_file = st.file_uploader('Upload EnrollmentMetrics XLSX fil
 df_levelReport_file = st.file_uploader('Upload LevelWiseReport_Level1', type=['xlsx'])
 
 # If files already exist in the directory, load them
-if os.path.isfile('LevelWiseReport_Level1.xlsx'):
-    df_levelReport = pd.read_excel('LevelWiseReport_Level1.xlsx', engine='openpyxl')
-    st.session_state['df_levelReport'] = df_levelReport
-else:
-    df_levelReport = pd.DataFrame()
 
 
 if os.path.isfile('AllLevelActivity_L1.xlsx'):
@@ -44,6 +39,13 @@ if os.path.isfile('EnrollmentMetrics.xlsx'):
     st.session_state['df_enrollment_metrics'] = df_enrollment_metrics
 else:
     df_enrollment_metrics = pd.DataFrame()
+
+if os.path.isfile('LevelWiseReport_Level1.xlsx'):
+    df_levelReport = pd.read_excel('LevelWiseReport_Level1.xlsx', engine='openpyxl')
+    st.session_state['df_levelReport'] = df_levelReport
+else:
+    df_levelReport = pd.DataFrame()
+
 
 # Read data from uploaded Excel files
 if df_activity_file is not None:
@@ -101,6 +103,17 @@ try:
     col3.metric(label='Average Time Spent', value=average_time_spent, delta="7%")
     st.subheader('Total Attempts by Module')
     components.html(html_graph, height=600)
+
+
+    # import os
+
+# directory_path = '/path/to/directory'
+
+    for filename in os.listdir(""):
+        st.write(filename)
+        if filename.endswith('.xlsx'):
+            os.remove(os.path.join(directory_path, filename))
+
 
 except IndexError:
     st.warning("Upload Files to View Analytics")
