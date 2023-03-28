@@ -24,7 +24,7 @@ averagedayscount = df_enrollment_metrics['DaysCount_after_enrolling'].mean()
 df_filtered = df_enrollment_metrics.loc[(df_enrollment_metrics['target'] == 1) & (df_enrollment_metrics['DaysCount_after_enrolling'] >= averagedayscount)]
 
 # Select the columns with user names and emails
-df_filtered = df_filtered[['Learner Name', 'Email Id']]
+df_filtered = df_filtered[['Learner_Name', 'Email_Id']]
 
 # Show the filtered dataframe
 st.table(df_filtered)
