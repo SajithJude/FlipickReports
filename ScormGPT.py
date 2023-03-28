@@ -12,16 +12,6 @@ def extract_zip_file(file):
     with zipfile.ZipFile(file, 'r') as zip_ref:
         zip_ref.extractall()
 
-# Create session state if it does not exist
-if 'df_activity' not in st.session_state:
-    st.session_state['df_activity'] = pd.DataFrame()
-if 'df_levelwise_assessment' not in st.session_state:
-    st.session_state['df_levelwise_assessment'] = pd.DataFrame()
-if 'df_enrollment_metrics' not in st.session_state:
-    st.session_state['df_enrollment_metrics'] = pd.DataFrame()
-if 'df_levelReport' not in st.session_state:
-    st.session_state['df_levelReport'] = pd.DataFrame()
-
 # Allow the user to upload a zip file
 file = st.file_uploader('Upload zip file', type=['zip'])
 if file is not None:
@@ -32,6 +22,18 @@ df_activity = pd.read_excel('AllLevelActivity_L1.xlsx', engine='openpyxl') if os
 df_levelwise_assessment = pd.read_excel('LevelWiseAssesment_Level1.xlsx', engine='openpyxl') if os.path.isfile('LevelWiseAssesment_Level1.xlsx') else pd.DataFrame()
 df_enrollment_metrics = pd.read_excel('EnrollmentMetrics.xlsx', engine='openpyxl') if os.path.isfile('EnrollmentMetrics.xlsx') else pd.DataFrame()
 df_levelReport = pd.read_excel('LevelWiseReport_Level1.xlsx', engine='openpyxl') if os.path.isfile('LevelWiseReport_Level1.xlsx') else pd.DataFrame()
+
+
+
+# Create session state if it does not exist
+if 'df_activity' not in st.session_state:
+    st.session_state['df_activity'] = df_activity
+if 'df_levelwise_assessment' not in st.session_state:
+    st.session_state['df_levelwise_assessment'] = df_levelwise_assessment
+if 'df_enrollment_metrics' not in st.session_state:
+    st.session_state['df_enrollment_metrics'] = df_enrollment_metrics
+if 'df_levelReport' not in st.session_state:
+    st.session_state['df_levelReport'] = df_levelReport
 
 # Calculate performance metrics and create charts
 if not df_activity.empty and not df_enrollment_metrics.empty:
