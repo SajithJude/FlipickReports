@@ -22,7 +22,7 @@ st.table(df_activity.head())
 # st.write(df_activity.iloc[:, 1])
 # Merge the dataframes
 df = pd.merge(df_activity, df_levelwise_assessment, on=['Learner_Name', 'Email_Id'])
-df = pd.merge(df, df_enrollment_metrics, on=['Learner_Name', 'Learner_Email'])
+df = pd.merge(df, df_enrollment_metrics, on=['Learner_Name', 'Email_Id'])
 
 # # Merge the dataframes using iloc to select columns 1 and 2
 # df = pd.merge(df_activity, df_levelwise_assessment, on=[df_activity.iloc[:,1], df_activity.iloc[:,2]])
