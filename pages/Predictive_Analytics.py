@@ -23,7 +23,12 @@ st.table(df_enrollment_metrics.head())
 # st.write(df_activity.iloc[:, 1])
 # Merge the dataframes
 df = pd.merge(df_activity, df_levelwise_assessment, on=['Learner_Name', 'Email_Id'])
+
+st.table(df.head())
 df = pd.merge(df, df_enrollment_metrics, on=['Learner_Name', 'Email_Id'])
+
+
+st.table(df.head())
 df = df.drop(['Institute_x', 'Institute_y', 'Enrolled_By', 'Enrollment_Date'], axis=1)
 
 # # Merge the dataframes using iloc to select columns 1 and 2
