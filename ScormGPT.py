@@ -39,18 +39,18 @@ else:
 # try:
 
 
-df_activity['Total_Time_Spent'] = pd.to_timedelta(df_activity.iloc[:, 9])
+df_activityTimespent = pd.to_timedelta(df_activity.iloc[:, 9])
 # Calculate performance metrics
 total_learners = len(df_enrollment_metrics)
-total_attempts = df_activity['Total_No_Of_Attempts'].sum()
-average_time_spent = df_activity['Total_Time_Spent'].mean()
+total_attempts = df_activity.iloc[:, 8].sum()
+# average_time_spent = df_activity['Total_Time_Spent'].mean()
 
 # Create a bar chart of total attempts for each module
-fig, ax = plt.subplots()
-df_activity[['Modules Completed', 'Total_No_Of_Attempts']].groupby(['Modules Completed']).sum().plot(kind='bar', ax=ax)
-ax.set_xlabel('Modules Completed')
-ax.set_ylabel('Total_No_Of_Attempts')
-plt.title('Total Attempts by Module')
+# fig, ax = plt.subplots()
+# df_activity[['Modules Completed', 'Total_No_Of_Attempts']].groupby(['Modules Completed']).sum().plot(kind='bar', ax=ax)
+# ax.set_xlabel('Modules Completed')
+# ax.set_ylabel('Total_No_Of_Attempts')
+# plt.title('Total Attempts by Module')
 
 # Convert the plot to an interactive chart using mpld3
 html_graph = mpld3.fig_to_html(fig, template_type="simple")
