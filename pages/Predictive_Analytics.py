@@ -14,7 +14,7 @@ st.table(df_activity.head())
 st.write(df_activity.iloc[:, 1])
 # Merge the dataframes
 # Merge the dataframes using iloc to select columns 1 and 2
-df = pd.merge(df_activity, df_levelwise_assessment, on=[df_activity.iloc[:,1], df_activity.iloc[:,2]])
+df = pd.merge(df_activity, df_levelwise_assessment, on=[df_activity.iloc[:,1][1], df_activity.iloc[:,2][1]])
 df = pd.merge(df, df_enrollment_metrics, on=[df_activity.iloc[:,1], df_activity.iloc[:,2]])
 
-st.table(df_activity.head())
+st.table(df.head())
