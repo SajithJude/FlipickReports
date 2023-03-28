@@ -1,8 +1,10 @@
 import streamlit as st 
-
+import os
 
 import pandas as pd
 import openai
+
+
 
 openai.api_key = os.getenv("API_KEY")
 
