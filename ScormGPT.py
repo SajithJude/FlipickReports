@@ -64,7 +64,7 @@ ax.set_xlabel('Modules Completed')
 ax.set_ylabel('Total_No_Of_Attempts')
 plt.title('Total Attempts by Module')
 
-Convert the plot to an interactive chart using mpld3
+# Convert the plot to an interactive chart using mpld3
 html_graph = mpld3.fig_to_html(fig, template_type="simple")
 
 # Create the streamlit app
