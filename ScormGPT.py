@@ -93,7 +93,7 @@ df_filtered_names = df_filtered['Learner_Name']
 df_levelReport_filtered = df_levelReport[df_levelReport['Learner_Name'].isin(df_filtered_names)]
 
 # Show the filtered dataframe
-# st.table(df_levelReport_filtered)
+st.table(df_levelReport_filtered)
 
 st.caption("Predictive analytics")
 st.subheader("learners who are at risk of dropping out of the course")
