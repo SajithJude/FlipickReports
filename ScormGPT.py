@@ -87,6 +87,9 @@ dropout = len(df_filtered)
 total = len(df_enrollment_metrics)
 
 # Select the columns with user names and emails
+df_filtered = df_filtered[['Learner_Name', 'Learner_Email']]
+
+df_filtered_names = df_filtered['Learner_Name']
 df_levelReport_Filtered = df_levelReport_Filtered[df_levelReport_Filtered['Learner_Name'].isin(df_filtered['Learner_Name'])]
 
 # Show the filtered dataframe
