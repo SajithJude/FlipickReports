@@ -5,92 +5,68 @@ import mpld3
 from mpld3 import plugins
 import streamlit.components.v1 as components
 import os
+import zipfile
 
-# openai.api_key = os.getenv("API_KEY")
-
-# Read data from Excel files
+# Define function to read Excel files
 def read_excel_file(file):
     df = pd.read_excel(file, engine='openpyxl')
     return df
 
-# Allow the user to upload Excel files
-df_activity_file = st.file_uploader('Upload ALL level activity XLSX file', type=['xlsx'])
-df_levelwise_assessment_file = st.file_uploader('Upload Level Wise assessment for level1 XLSX file', type=['xlsx'])
-df_enrollment_metrics_file = st.file_uploader('Upload EnrollmentMetrics XLSX file', type=['xlsx'])
-df_levelReport_file = st.file_uploader('Upload LevelWiseReport_Level1', type=['xlsx'])
+# Define function to extract zip files
+def extract_zip_file(file):
+    with zipfile.ZipFile(file, 'r') as zip_ref:
+        zip_ref.extractall()
 
-# If files already exist in the directory, load them
+# Define file uploaders
+file_uploaders = {
+    'Upload ALL level activity XLSX file': 'df_activity.xlsx',
+    'Upload Level Wise assessment for level1 XLSX file': 'df_levelwise_assessment.xlsx',
+    'Upload EnrollmentMetrics XLSX file': 'df_enrollment_metrics.xlsx',
+    'Upload LevelWiseReport_Level1': 'df_levelReport.xlsx',
+    'Upload zip file': 'data.zip'
+}
 
+# Create session state if it does not exist
+if 'df_activity' not in st.session_state:
+    st.session_state['df_activity'] = pd.DataFrame()
+if 'df_levelwise_assessment' not in st.session_state:
+    st.session_state['df_levelwise_assessment'] = pd.DataFrame()
+if 'df_enrollment_metrics' not in st.session_state:
+    st.session_state['df_enrollment_metrics'] = pd.DataFrame()
+if 'df_levelReport' not in st.session_state:
+    st.session_state['df_levelReport'] = pd.DataFrame()
 
-if os.path.isfile('AllLevelActivity_L1.xlsx'):
-    df_activity = pd.read_excel('AllLevelActivity_L1.xlsx', engine='openpyxl')
-    st.session_state['df_activity'] = df_activity
-else:
-    df_activity = pd.DataFrame()
+# Allow the user to upload files and extract zip file
+for title, filename in file_uploaders.items():
+    file = st.file_uploader(title, type=['xlsx', 'zip'])
+    if file is not None:
+        if file.name.endswith('.zip'):
+            extract_zip_file(file)
+        else:
+            df = read_excel_file(file)
+            df.to_excel(filename, index=False)
+            st.session_state[filename.replace('.xlsx', '')] = df
 
-if os.path.isfile('LevelWiseAssesment_Level1.xlsx'):
-    df_levelwise_assessment = pd.read_excel('LevelWiseAssesment_Level1.xlsx', engine='openpyxl')
-    st.session_state['df_levelwise_assessment'] = df_levelwise_assessment
-else:
-    df_levelwise_assessment = pd.DataFrame()
+# Read data from Excel files
+df_activity = st.session_state['df_activity']
+df_levelwise_assessment = st.session_state['df_levelwise_assessment']
+df_enrollment_metrics = st.session_state['df_enrollment_metrics']
+df_levelReport = st.session_state['df_levelReport']
 
-if os.path.isfile('EnrollmentMetrics.xlsx'):
-    df_enrollment_metrics = pd.read_excel('EnrollmentMetrics.xlsx', engine='openpyxl')
-    st.session_state['df_enrollment_metrics'] = df_enrollment_metrics
-else:
-    df_enrollment_metrics = pd.DataFrame()
-
-if os.path.isfile('LevelWiseReport_Level1.xlsx'):
-    df_levelReport = pd.read_excel('LevelWiseReport_Level1.xlsx', engine='openpyxl')
-    st.session_state['df_levelReport'] = df_levelReport
-else:
-    df_levelReport = pd.DataFrame()
-
-
-# Read data from uploaded Excel files
-if df_activity_file is not None:
-    df_activity = read_excel_file(df_activity_file)
-    df_activity.to_excel('df_activity.xlsx', index=False)
-    st.session_state['df_activity'] = df_activity
-
-if df_levelwise_assessment_file is not None:
-    df_levelwise_assessment = read_excel_file(df_levelwise_assessment_file)
-    df_levelwise_assessment.to_excel('df_levelwise_assessment.xlsx', index=False)
-    st.session_state['df_levelwise_assessment'] = df_levelwise_assessment
-
-if df_enrollment_metrics_file is not None:
-    df_enrollment_metrics = read_excel_file(df_enrollment_metrics_file)
-    df_enrollment_metrics.to_excel('df_enrollment_metrics.xlsx', index=False)
-    st.session_state['df_enrollment_metrics'] = df_enrollment_metrics
-
-if df_levelReport_file is not None:
-    df_levelReport = read_excel_file(df_levelReport_file)
-    df_levelReport.to_excel('LevelWiseReport_Level1.xlsx', index=False)
-    st.session_state['df_levelReport'] = df_levelReport
-
-
-
-try:
+# Calculate performance metrics and create charts
+if not df_activity.empty and not df_enrollment_metrics.empty:
     df_activity['hours'] = pd.to_datetime(df_activity.iloc[:, 9]) - pd.to_datetime(df_activity.iloc[:, 9]).min()
     df_activity['hours'] = df_activity['hours'].dt.total_seconds() / 3600
-    average_time_spent =  df_activity['hours'].mean()
-    # st.write(average_time_spent)
+    average_time_spent = df_activity['hours'].mean()
 
-
-
-    # Calculate performance metrics
     total_learners = len(df_enrollment_metrics)
     total_attempts = df_activity.iloc[:, 8].sum()
-    # st.table(df_activity.head())
 
-    # Create a bar chart of total attempts for each module
     fig, ax = plt.subplots()
     df_activity.iloc[:, [6, 9]].groupby(df_activity.iloc[:, 6]).sum().plot(kind='bar', ax=ax)
     ax.set_xlabel('Modules Completed')
     ax.set_ylabel('Total_No_Of_Attempts')
     plt.title('Total Attempts by Module')
-
-    # Convert the plot to an interactive chart using mpld3
     html_graph = mpld3.fig_to_html(fig, template_type="simple")
 
     # Create the streamlit app
@@ -104,20 +80,7 @@ try:
     st.subheader('Total Attempts by Module')
     components.html(html_graph, height=600)
 
-
-    # import os
-
-# directory_path = '/path/to/directory'
-
-    for filename in os.listdir(""):
-        st.write(filename)
-        if filename.endswith('.xlsx'):
-            os.remove(os.path.join(directory_path, filename))
-
-
-except IndexError:
-    st.warning("Upload Files to View Analytics")
-
-
-# except KeyError:
-#     st.warning("Upload Files to View Analytics")
+# Delete Excel files at the end
+for filename in ['df_activity.xlsx', 'df_levelwise_assessment.xlsx', 'df_enrollment_metrics.xlsx', 'df_levelReport.xlsx']:
+    if os.path.isfile(filename):
+        os.remove(filename)
