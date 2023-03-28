@@ -6,7 +6,7 @@ from mpld3 import plugins
 import streamlit.components.v1 as components
 import os
 
-openai.api_key = os.getenv("API_KEY")
+# openai.api_key = os.getenv("API_KEY")
 
 # Read data from Excel files
 def read_excel_file(file):
