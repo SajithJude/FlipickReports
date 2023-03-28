@@ -54,10 +54,10 @@ with st.expander("Take Proactive measures to retain Users"):
     moodules = st.multiselect("Select Weak modules",['Green', 'Yellow', 'Red', 'Blue'],)
     if proact:
         st.success("Generating Motivational Email and studyplan")
-        input = "Generate a Motivational followup email for students who feel lack of motivation due to low score on modules like :"+ str(moodules)
+        inut = "Generate a Motivational followup email for students who feel lack of motivation due to low score on modules like :"+ str(moodules)
         response = openai.Completion.create(
             model="text-davinci-003",
-            prompt=input,
+            prompt=inut,
             temperature=0.56,
             max_tokens=2100,
             top_p=1,
