@@ -22,7 +22,7 @@ df_enrollment_metrics['DaysCount_after_enrolling'] = (pd.to_datetime('today') - 
 averagedayscount = df_enrollment_metrics['DaysCount_after_enrolling'].mean()
 
 df_filtered = df_enrollment_metrics.loc[(df_enrollment_metrics['target'] == 1) & (df_enrollment_metrics['DaysCount_after_enrolling'] >= averagedayscount)]
-
+st.write(len(df_filtered))
 # Select the columns with user names and emails
 df_filtered = df_filtered[['Learner_Name', 'Email_Id']]
 
