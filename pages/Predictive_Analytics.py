@@ -37,3 +37,15 @@ st.subheader("learners who are at risk of dropping out of the course")
 col1, col2 = st.columns(2)
 col1.metric("Predicted Dropout Count",value=dropout)
 col2.metric("Percentage of Dropout Count",value=str((dropout/total)*100)+" %")
+
+st.write("From the available data usage reports, we have predicted that " + str(dropout) + " Number of students are in the likelihood of dropping out, Click the button bellow to take proactive measures in retaining the learners.")
+
+with st.expander("Take Proactive measures to retain Users"):
+    proact = st.button("start")
+    if proact:
+        st.success("Generating Motivational Email and studyplan")
+
+with st.expander("Keep pushing the persistent Users"):
+    proact = st.button("Generate Email")
+    if proact:
+        st.success("Generating Motivational Email follow up questions")
