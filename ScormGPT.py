@@ -20,8 +20,8 @@ df_enrollment_metrics_file = st.file_uploader('Upload EnrollmentMetrics XLSX fil
 df_levelReport_file = st.file_uploader('Upload LevelWiseReport_Level1', type=['xlsx'])
 
 # If files already exist in the directory, load them
-if os.path.isfile('AllLevelActivity_L1.xlsx'):
-    df_levelReport = pd.read_excel('AllLevelActivity_L1.xlsx', engine='openpyxl')
+if os.path.isfile('LevelWiseReport_Level1.xlsx'):
+    df_levelReport = pd.read_excel('LevelWiseReport_Level1.xlsx', engine='openpyxl')
     st.session_state['df_levelReport'] = df_levelReport
 else:
     df_levelReport = pd.DataFrame()
@@ -63,7 +63,7 @@ if df_enrollment_metrics_file is not None:
 
 if df_levelReport_file is not None:
     df_levelReport = read_excel_file(df_levelReport_file)
-    df_levelReport.to_excel('AllLevelActivity_L1.xlsx', index=False)
+    df_levelReport.to_excel('LevelWiseReport_Level1.xlsx', index=False)
     st.session_state['df_levelReport'] = df_levelReport
 
 
