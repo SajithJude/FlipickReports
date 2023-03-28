@@ -66,34 +66,34 @@ if not df_activity.empty and not df_enrollment_metrics.empty:
 
 
 
-df_levelReport.columns = [c.replace(' ', '_') for c in df_levelReport.columns]
-df_levelwise_assessment.columns = [c.replace(' ', '_') for c in df_levelwise_assessment.columns]
-df_enrollment_metrics.columns = [c.replace(' ', '_') for c in df_enrollment_metrics.columns]
-df_activity.columns = [c.replace(' ', '_') for c in df_activity.columns]
+    df_levelReport.columns = [c.replace(' ', '_') for c in df_levelReport.columns]
+    df_levelwise_assessment.columns = [c.replace(' ', '_') for c in df_levelwise_assessment.columns]
+    df_enrollment_metrics.columns = [c.replace(' ', '_') for c in df_enrollment_metrics.columns]
+    df_activity.columns = [c.replace(' ', '_') for c in df_activity.columns]
 
 
-df_enrollment_metrics = df_enrollment_metrics.rename(columns={'Learner_Email': 'Email_Id'})
+    df_enrollment_metrics = df_enrollment_metrics.rename(columns={'Learner_Email': 'Email_Id'})
 
-df_enrollment_metrics['target'] = df_enrollment_metrics.apply(lambda row: 1 if row['Diagnostic_Or_First_Level_Assigned'] == row['Current_Level'] else 0, axis=1)
-# df_enrollment_metrics['DaysCount_after_enrolling'] = str( pd.to_datetime('today') - df_enrollment_metrics['Enrollment_Date']).dt.days
+    df_enrollment_metrics['target'] = df_enrollment_metrics.apply(lambda row: 1 if row['Diagnostic_Or_First_Level_Assigned'] == row['Current_Level'] else 0, axis=1)
+    # df_enrollment_metrics['DaysCount_after_enrolling'] = str( pd.to_datetime('today') - df_enrollment_metrics['Enrollment_Date']).dt.days
 
-df_enrollment_metrics['Enrollment_Date'] = pd.to_datetime(df_enrollment_metrics['Enrollment_Date'])
-df_enrollment_metrics['DaysCount_after_enrolling'] = (pd.to_datetime('today') - df_enrollment_metrics['Enrollment_Date']).dt.days
+    df_enrollment_metrics['Enrollment_Date'] = pd.to_datetime(df_enrollment_metrics['Enrollment_Date'])
+    df_enrollment_metrics['DaysCount_after_enrolling'] = (pd.to_datetime('today') - df_enrollment_metrics['Enrollment_Date']).dt.days
 
-averagedayscount = df_enrollment_metrics['DaysCount_after_enrolling'].mean()
+    averagedayscount = df_enrollment_metrics['DaysCount_after_enrolling'].mean()
 
-df_filtered = df_enrollment_metrics.loc[(df_enrollment_metrics['target'] == 1) & (df_enrollment_metrics['DaysCount_after_enrolling'] >= averagedayscount)]
-dropout = len(df_filtered)
-total = len(df_enrollment_metrics)
+    df_filtered = df_enrollment_metrics.loc[(df_enrollment_metrics['target'] == 1) & (df_enrollment_metrics['DaysCount_after_enrolling'] >= averagedayscount)]
+    dropout = len(df_filtered)
+    total = len(df_enrollment_metrics)
 
-# Select the columns with user names and emails
-df_filtered = df_filtered[['Learner_Name', 'Email_Id']]
+    # Select the columns with user names and emails
+    df_filtered = df_filtered[['Learner_Name', 'Email_Id']]
 
-df_filtered_names = df_filtered['Learner_Name']
-df_levelReport_filtered = df_levelReport[df_levelReport['Learner_Name'].isin(df_filtered_names)]
+    df_filtered_names = df_filtered['Learner_Name']
+    df_levelReport_filtered = df_levelReport[df_levelReport['Learner_Name'].isin(df_filtered_names)]
 
-# Show the filtered dataframe
-st.table(df_levelReport_filtered)
+    # Show the filtered dataframe
+    st.table(df_levelReport_filtered)
 
 st.caption("Predictive analytics")
 st.subheader("learners who are at risk of dropping out of the course")
