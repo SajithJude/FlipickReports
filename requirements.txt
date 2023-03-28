@@ -1,5 +1,8 @@
 streamlit
-llama-index
+scikit-learn
+pickle5
+pandas
+numpy
+mpld3
+matplotlib
 openai
-PyPDF2
-streamlit-chat
