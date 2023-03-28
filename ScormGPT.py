@@ -6,14 +6,14 @@ from mpld3 import plugins
 import streamlit.components.v1 as components
 
 # Read data from CSV files
-df_activity = pd.read_csv('ALL level activity.csv')
+df_activity = pd.read_csv('AllLevelActivity_L1 - Sheet 1.csv')
 df_levelwise_assessment = pd.read_csv('Level Wise assessment for level1.csv')
-df_enrollment_metrics = pd.read_csv('EnrollmentMetrics.csv')
+df_enrollment_metrics = pd.read_csv('EnrollmentMetrics - Sheet 1.csv')
 
 # Calculate performance metrics
 total_learners = len(df_enrollment_metrics)
-total_attempts = df_activity['Total No Of Attempts'].sum()
-average_time_spent = df_activity['Total Time Spent'].mean()
+total_attempts = df_activity['Total_No_Of_Attempts'].sum()
+average_time_spent = df_activity['Total_Time_Spent'].mean()
 
 # Create a bar chart of total attempts for each module
 fig, ax = plt.subplots()
