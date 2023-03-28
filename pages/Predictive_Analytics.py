@@ -11,7 +11,7 @@ df_activity  = st.session_state['df_activity']
 df_levelwise_assessment.columns = [c.replace(' ', '_') for c in df_levelwise_assessment.columns]
 df_enrollment_metrics.columns = [c.replace(' ', '_') for c in df_enrollment_metrics.columns]
 df_enrollment_metrics = df_enrollment_metrics.rename(columns={'Learner_Email': 'Email_Id'})
-df_activity.columns = [c.replace(' ', '_') for c in df_activity.columns]
+# df_activity.columns = [c.replace(' ', '_') for c in df_activity.columns]
 
 
 st.table(df_activity.head())
@@ -25,7 +25,7 @@ st.table(df_enrollment_metrics.head())
 df = pd.merge(df_activity, df_levelwise_assessment, on=['Learner_Name', 'Email_Id'])
 
 st.table(df.head())
-df2 = pd.merge(df, df_enrollment_metrics, on=['Learner_Name', 'Email_Id'])
+df2 = pd.merge(df, df_enrollment_metrics, on=['Learner_Name'])
 
 
 st.table(df2.head())
