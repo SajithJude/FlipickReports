@@ -42,8 +42,12 @@ try:
 
     df_activityTimespent = pd.to_timedelta(df_activity.iloc[:, 10])
     average_time_spent = df_activityTimespent.mean()
+        
+    # activityhrs = df_activity['Total_Time_Spent'].dt.total_seconds() / 3600
+    # ahrs = activityhrs.mean()
 except KeyError:
     st.warning("Upload Files to View Analytics")
+
 # Calculate performance metrics
 total_learners = len(df_enrollment_metrics)
 total_attempts = df_activity.iloc[:, 8].sum()
@@ -59,8 +63,6 @@ total_attempts = df_activity.iloc[:, 8].sum()
 # Convert the plot to an interactive chart using mpld3
 # html_graph = mpld3.fig_to_html(fig, template_type="simple")
 
-activityhrs = df_activity['Total_Time_Spent'].dt.total_seconds() / 3600
-ahrs = activityhrs.mean()
 # Create the streamlit app
 st.title('Overall Performance Dashboard')
 st.subheader('Performance Metrics')
