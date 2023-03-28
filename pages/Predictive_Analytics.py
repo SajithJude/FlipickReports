@@ -4,6 +4,7 @@ import os
 import pandas as pd
 import openai
 
+st.session_state = {}
 
 
 openai.api_key = os.getenv("API_KEY")
