@@ -14,7 +14,13 @@ df_enrollment_metrics = df_enrollment_metrics.rename(columns={'Learner_Email': '
 # df_activity.columns = [c.replace(' ', '_') for c in df_activity.columns]
 
 df_enrollment_metrics['target'] = df_enrollment_metrics.apply(lambda row: 1 if row['Diagnostic_Or_First_Level_Assigned'] == row['Current_Level'] else 0, axis=1)
-df_enrollment_metrics['DaysCount_after_enrolling'] = str( pd.to_datetime('today') - df_enrollment_metrics['Enrollment_Date']).dt.days
+# df_enrollment_metrics['DaysCount_after_enrolling'] = str( pd.to_datetime('today') - df_enrollment_metrics['Enrollment_Date']).dt.days
+
+df_enrollment_metrics['Enrollment_Date'] = pd.to_datetime(df_enrollment_metrics['Enrollment_Date'])
+df_enrollment_metrics['DaysCount_after_enrolling'] = (pd.to_datetime('today') - df_enrollment_metrics['Enrollment_Date']).dt.days
+
+
+
 st.table(df_activity.head())
 st.table(df_enrollment_metrics.head())
 
