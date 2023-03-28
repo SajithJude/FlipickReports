@@ -40,9 +40,9 @@ else:
 try:
 
 
-    df_activityTimespent = df_activity.iloc[:, 9]
+    df_activity.iloc[:, 9] = df_activity.iloc[:, 9].dt.total_seconds() / 3600
     # arhs = df_activityTimespent.dt.total_seconds() / 3600
-    average_time_spent = df_activityTimespent.mean()
+    average_time_spent = df_activity.iloc[:, 9].mean()
     st.write(average_time_spent)
 
         
