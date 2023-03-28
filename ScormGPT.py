@@ -91,7 +91,7 @@ df_filtered = df_filtered[['Learner_Name', 'Learner_Email']]
 
 df_filtered_names = df_filtered['Learner_Name']
 df_levelReport_filtered = df_levelReport[df_levelReport['Learner_Name'].isin(df_filtered_names)]
-df_levelReport_Filtered = df_levelReport_Filtered[df_levelReport_Filtered['Learner_Name'].isin(df_filtered['Learner_Name'])]
+df_levelReport_filtered = df_levelReport_filtered[df_levelReport_filtered['Learner_Name'].isin(df_filtered['Learner_Name'])]
 
 # Show the filtered dataframe
 st.table(df_levelReport_filtered)
