@@ -22,29 +22,18 @@ df_enrollment_metrics['DaysCount_after_enrolling'] = (pd.to_datetime('today') - 
 averagedayscount = df_enrollment_metrics['DaysCount_after_enrolling'].mean()
 
 df_filtered = df_enrollment_metrics.loc[(df_enrollment_metrics['target'] == 1) & (df_enrollment_metrics['DaysCount_after_enrolling'] >= averagedayscount)]
-st.write(len(df_filtered))
-st.write(len(df_enrollment_metrics))
+dropout = len(df_filtered)
+total = len(df_enrollment_metrics)
 
 # Select the columns with user names and emails
 df_filtered = df_filtered[['Learner_Name', 'Email_Id']]
 
 # Show the filtered dataframe
 st.table(df_filtered)
-# st
 
+st.title("Predictive analytics")
+st.subheader("learners who are at risk of dropping out of the course")
 
-# st.table(df_activity.head())
-# st.table(df_enrollment_metrics.head())
-
-
-# df = pd.merge(df_activity, df_levelwise_assessment, on=['Learner_Name', 'Email_Id'])
-
-# st.table(df.head())
-
-# df = df.drop(['Institute_x', 'Enrolled_By', 'Enrollment_Date'], axis=1)
-
-# # Merge the dataframes using iloc to select columns 1 and 2
-# df = pd.merge(df_activity, df_levelwise_assessment, on=[df_activity.iloc[:,1], df_activity.iloc[:,2]])
-# df = pd.merge(df, df_enrollment_metrics, on=[df_activity.iloc[:,1], df_activity.iloc[:,2]])
-
-# st.table(df.head())
+col1, col2 = st.columns(2)
+col1.metric("Predicted Dropout Count",value=dropout)
+col2.metric("Percentage of Dropout Count",value=str((dropout/total)*100)+" %")
