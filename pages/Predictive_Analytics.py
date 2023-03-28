@@ -66,14 +66,14 @@ with st.expander("Take Proactive measures to retain Users"):
         )
         st.code(response.choices[0].text, language=None)
 
-with st.expander("Take Proactive measures to retain Users"):
+with st.expander("Congrajulate Active users"):
     proact = st.button("start")
     if proact:
         st.success("Generating Motivational Email and studyplan")
-        input = "Generate a Motivational followup email for students who feel lack of motivation due to low score on modules like 
+        it = "Generate a Motivational followup email for students who feel lack of motivation due to low score on modules like "
         response = openai.Completion.create(
             model="text-davinci-003",
-            prompt=input,
+            prompt=it,
             temperature=0.56,
             max_tokens=2100,
             top_p=1,
