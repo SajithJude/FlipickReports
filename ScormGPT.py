@@ -19,9 +19,9 @@ average_time_spent = df_activity['Total_Time_Spent'].mean()
 
 # Create a bar chart of total attempts for each module
 fig, ax = plt.subplots()
-df_activity[['Modules Completed', 'Total No Of Attempts']].groupby(['Modules Completed']).sum().plot(kind='bar', ax=ax)
+df_activity[['Modules Completed', 'Total_No_Of_Attempts']].groupby(['Modules Completed']).sum().plot(kind='bar', ax=ax)
 ax.set_xlabel('Modules Completed')
-ax.set_ylabel('Total No Of Attempts')
+ax.set_ylabel('Total_No_Of_Attempts')
 plt.title('Total Attempts by Module')
 
 # Convert the plot to an interactive chart using mpld3
