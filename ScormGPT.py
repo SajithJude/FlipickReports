@@ -39,7 +39,7 @@ else:
 # try:
 
 
-df_activityTimespent = pd.to_timedelta(df_activity.iloc[:, 9])
+df_activityTimespent = pd.to_timedelta(df_activity.iloc[:, 10])
 # Calculate performance metrics
 total_learners = len(df_enrollment_metrics)
 total_attempts = df_activity.iloc[:, 8].sum()
