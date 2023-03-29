@@ -134,4 +134,4 @@ try:
             st.write(filename," Removed successfully")
 
 except ValueError:
-    st.
+    st.warning("Please Upload the zip file containg your reports to get started")
