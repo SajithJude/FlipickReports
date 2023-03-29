@@ -98,7 +98,7 @@ try:
     df_levelReport_Filtered = df_levelReport_filtered[df_levelReport_filtered['Learner_Name'].isin(df_filtered['Learner_Name'])]
 
     # Show the filtered dataframe
-    st.table(df_filtered)
+
 
     st.caption("Predictive analytics")
     st.subheader("learners who are at risk of dropping out of the course")
@@ -125,7 +125,8 @@ try:
                 presence_penalty=0
             )
             st.code(response.choices[0].text, language=None)
-
+    st.subheader("List fo Learners who are at risk")
+    st.table(df_filtered)
 
 
     for filename in ['AllLevelActivity_L1.xlsx', 'LevelWiseAssesment_Level1.xlsx', 'EnrollmentMetrics.xlsx', 'LevelWiseReport_Level1.xlsx']:
