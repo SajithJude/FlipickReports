@@ -107,7 +107,7 @@ st.write("From the available data usage reports, we have predicted that " + str(
 
 with st.expander("Take Proactive measures to retain Users"):
     proact = st.button("start")
-    moodules = st.multiselect("Select Weak modules",['Green', 'Yellow', 'Red', 'Blue'],)
+    moodules = st.multiselect("Select Weak modules",['Listening', 'speaking', 'Reading', 'Writing', 'Grammar', 'Vocabulary'])
     if proact:
         st.success("Generating Motivational Email and studyplan")
         inut = "Generate a Motivational followup email for students who feel lack of motivation due to low score on modules like :"+ str(moodules)
