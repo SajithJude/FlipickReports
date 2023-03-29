@@ -9,8 +9,6 @@ import openai
 # st.session_state['df_activity'] = {}
 # st.session_state['df_levelReport'] = {}
 
-openai.api_key = os.getenv("API_KEY")
-
 df_levelwise_assessment  = st.session_state['df_levelwise_assessment'] 
 df_enrollment_metrics  = st.session_state['df_enrollment_metrics'] 
 df_activity  = st.session_state['df_activity'] 
