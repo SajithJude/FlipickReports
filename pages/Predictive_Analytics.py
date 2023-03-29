@@ -46,7 +46,7 @@ if result:
         model="text-davinci-003",
         prompt=promp,
         temperature=0.56,
-        max_tokens=2100,
+        max_tokens=1000,
         top_p=1,
         frequency_penalty=0.35,
         presence_penalty=0
