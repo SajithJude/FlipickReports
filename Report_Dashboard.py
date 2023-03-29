@@ -124,8 +124,10 @@ try:
                 frequency_penalty=0.35,
                 presence_penalty=0
             )
-            st.code(response.choices[0].text, language=None)
-    st.subheader("List of Learners who are at risk")
+            email_text = response.choices[0].text.strip()
+            df_filtered['Follow_up_email'] = email_text
+            st.code(email_text, language=None)
+    st.subheader("List of Learners who are at risk with email")
     st.table(df_filtered)
 
 
