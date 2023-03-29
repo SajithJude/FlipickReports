@@ -7,6 +7,7 @@ import streamlit.components.v1 as components
 import os
 import zipfile
 import openai
+import base64
 
 openai.api_key = os.getenv("API_KEY")
 
