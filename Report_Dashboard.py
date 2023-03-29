@@ -6,6 +6,10 @@ from mpld3 import plugins
 import streamlit.components.v1 as components
 import os
 import zipfile
+import openai
+
+openai.api_key = os.getenv("API_KEY")
+
 
 # Define function to extract zip files
 def extract_zip_file(file):
