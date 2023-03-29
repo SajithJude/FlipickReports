@@ -114,7 +114,7 @@ with st.expander("Take Proactive measures to retain Users"):
     moodules = st.multiselect("Select Weak modules",['Listening', 'speaking', 'Reading', 'Writing', 'Grammar', 'Vocabulary'])
     if proact:
         st.success("Generating Motivational Email and studyplan")
-        inut = "Generate a Motivational followup email for students who feel lack of motivation due to low score on modules like :"+ str(moodules)
+        inut = "Generate a Motivational followup email for students who feel lack of motivation due to low score on modules like :"+ str(moodules) + " Provide learning tips and advice on how to excel in those modules ."
         response = openai.Completion.create(
             model="text-davinci-003",
             prompt=inut,
@@ -126,27 +126,27 @@ with st.expander("Take Proactive measures to retain Users"):
         )
         st.code(response.choices[0].text, language=None)
 
-with st.expander("Congrajulate Active users"):
-    proact = st.button("generate wish")
-    if proact:
-        st.success("Generating Motivational Email and studyplan")
-        it = "Generate a Motivational followup email for students who feel lack of motivation due to low score on modules like "
-        response = openai.Completion.create(
-            model="text-davinci-003",
-            prompt=it,
-            temperature=0.56,
-            max_tokens=2100,
-            top_p=1,
-            frequency_penalty=0.35,
-            presence_penalty=0
-        )
-        st.code(response.choices[0].text, language=None)
+# with st.expander("Congrajulate Active users"):
+#     proact = st.button("generate wish")
+#     if proact:
+#         st.success("Generating Motivational Email and studyplan")
+#         it = "Generate a Motivational followup email for students who feel lack of motivation due to low score on modules like "
+#         response = openai.Completion.create(
+#             model="text-davinci-003",
+#             prompt=it,
+#             temperature=0.56,
+#             max_tokens=2100,
+#             top_p=1,
+#             frequency_penalty=0.35,
+#             presence_penalty=0
+#         )
+#         st.code(response.choices[0].text, language=None)
 
 
-with st.expander("Keep pushing the persistent Users"):
-    proact = st.button("Generate Email")
-    if proact:
-        st.success("Generating Motivational Email follow up questions")
+# with st.expander("Keep pushing the persistent Users"):
+#     proact = st.button("Generate Email")
+#     if proact:
+#         st.success("Generating Motivational Email follow up questions")
 
 
 
