@@ -31,6 +31,8 @@ if essay:
     st.code(questions, language=None)
 
 
+st.subheader("Grade the student")
+
 # typeques= st.selectbox("Select the type of questions you want to generate",['essay','mcq'])
 scheme = st.text_area("Paste the marking scheme here")
 answers = st.text_area("Paste the answers given by student here")
