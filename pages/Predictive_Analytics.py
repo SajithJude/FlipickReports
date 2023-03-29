@@ -27,6 +27,6 @@ if essay:
         presence_penalty=0
     )
     questions = response.choices[0].text.strip()
-    st.write(questions)
+    st.code(questions, language=None)
 
 
