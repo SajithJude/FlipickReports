@@ -125,7 +125,7 @@ try:
                 presence_penalty=0
             )
             st.code(response.choices[0].text, language=None)
-    st.subheader("List fo Learners who are at risk")
+    st.subheader("List of Learners who are at risk")
     st.table(df_filtered)
 
 
@@ -135,4 +135,4 @@ try:
             st.write(filename," Removed successfully")
 
 except ValueError:
-    st.warning("Please Upload the zip file containg your reports to get started")
+    st.warning("Please Upload the zip file containing your reports to get started")
