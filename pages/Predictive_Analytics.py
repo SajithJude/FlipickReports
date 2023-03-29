@@ -11,8 +11,8 @@ openai.api_key = os.getenv("API_KEY")
 source = st.text_input("Input the source URL of the content")
 number = st.slider('Number of questions', 0, 5, 1)
 total_marks = st.number_input('Marks per question')
-essay = st.button("Generate Essay")
-grade = st.button("Grade essay")
+essay = st.button("Generate Essay Questions")
+# grade = st.button("Grade essay")
 
 
 if essay:
