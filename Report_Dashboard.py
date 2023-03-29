@@ -127,8 +127,19 @@ try:
             email_text = response.choices[0].text.strip()
             df_filtered['Follow_up_email'] = email_text
             st.code(email_text, language=None)
-    st.subheader("List of Learners who are at risk with email")
-    st.table(df_filtered)
+
+    
+    # st.subheader("List of Learners who are at risk with email")
+    with st.expander("View List of Learners who are at risk with email"):
+        download = st.button("download List")
+        st.table(df_filtered)
+        if download:
+            excel_file = df_filtered.to_excel("df_filtered.xlsx", index=False)
+            with open("df_filtered.xlsx", "rb") as f:
+                bytes_data = f.read()
+            b64 = base64.b64encode(bytes_data).decode()
+            href = f'<a href="data:application/octet-stream;base64,{b64}" download="df_filtered.xlsx">Download Excel file</a>'
+            st.markdown(href, unsafe_allow_html=True)
 
 
     for filename in ['AllLevelActivity_L1.xlsx', 'LevelWiseAssesment_Level1.xlsx', 'EnrollmentMetrics.xlsx', 'LevelWiseReport_Level1.xlsx']:
